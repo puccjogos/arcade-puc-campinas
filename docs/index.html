@@ -12,6 +12,11 @@
                 font-family: 'Open Sans', arial;
             }
 
+            h1 {
+                font-family: 'Raleway';
+                font-weight: 900;
+            }
+
             .intro {
                 font-style: italic;
             }
@@ -19,6 +24,15 @@
             code {
                 font-size: 16px;
             }
+
+            table {
+                background-color: #eee;
+            }
+
+            thead {
+                background-color: #ccc;
+            }
+
             td {
                 padding: 5px;
                 text-align: left;
@@ -32,6 +46,8 @@
     </head>
     <body>
         <h1>Arcade PUC-Campinas</h1>
+
+        <p class="intro">Atualizado em: 01/04/17, 19h.</p>
         <p class="intro">Infos e downloads para o Arcade dos alunos de Jogos Digitais da PUC-Campinas. Dúvidas, envie email <a href="mailto:enricllagsotera@gmail.com">aqui</a>.</p>
 
         <h2>Tela</h2>
@@ -42,6 +58,8 @@
 
         <p>Existe um <code>namespace</code> para o projeto chamado <code>ArcadePUCCampinas</code> que está reservado ao funcionamento do input e do gerenciamento dos jogos. Não deve ser alterado, assim como a parte de <code>InputManager</code> nos <code>ProjectSettings</code>.</p>
 
+        <p><a href="TecnicasMovimento.zip">Aqui está um exemplo de integração de input em jogo de nave.</a> Olhe em particular a classe <code>Nave</code>.</p>
+
         <h3>Instalação</h3>
 
         <ol>
@@ -49,58 +67,59 @@
             <li>Copie o arquivo <code>InputManager.asset</code> para a pasta <code>ProjectSettings</code> de seu projeto, substituindo o que está lá.</li>
             <li>Importe o arquivo <code>InputArcade.unitypackage</code> no seu projeto.</li>
             <li>Coloque o prefab <code>ArcadeJogo</code> na sua cena inicial.</li>
+            <li>Nos scripts em que for usar inputs, importe <code>ArcadePUCCampinas</code> e use as funções da classe <code>InputArcade</code>.</li>
         </ol>
 
         <h3>Uso do input</h3>
 
-        <p>A lógica de input é atualizada pelo prefab colocado na cena e é acessível através da classe estática <code>InputArcade</code> dentro do <code>namespace</code> chamado <code>ArcadePUCCampinas</code>. O <code>enum</code> <code>EControle</code> lista todos os inputs discretos que o sistema permite. Além desse <code>enum</code>, existe outro chamado <code>EEixo</code> para acessar os eixos verticais e horizontais como <code>floats</code>. Abaixo está a equivalência coom o teclado.</p>
+        <p>A lógica de input é atualizada pelo prefab colocado na cena e é acessível através da classe estática <code>InputArcade</code> dentro do <code>namespace</code> chamado <code>ArcadePUCCampinas</code>. O <code>enum</code> <code>EControle</code> lista todos os inputs discretos que o sistema permite. Além desse <code>enum</code>, existe outro chamado <code>EEixo</code> para acessar os eixos verticais e horizontais como <code>floats</code>. Abaixo está a equivalência com o teclado.</p>
 
         <table class="table table-bordered table-hover table-condensed">
-<thead><tr><th title="Field #1">EControle</th>
-<th title="Field #2">jogador 0</th>
-<th title="Field #3">jogador 1</th>
-</tr></thead>
-<tbody><tr>
-<td>HORIZONTAL</td>
-<td>A - D</td>
-<td>LeftArrow - RightArrow</td>
-</tr>
-<tr>
-<td>VERTICAL</td>
-<td>S - W</td>
-<td>DownArrow - UpArrow</td>
-</tr>
-<tr>
-<td>VERDE</td>
-<td>R</td>
-<td>O</td>
-</tr>
-<tr>
-<td>VERMELHO</td>
-<td>T</td>
-<td>I</td>
-</tr>
-<tr>
-<td>AMARELO</td>
-<td>G</td>
-<td>K</td>
-</tr>
-<tr>
-<td>AZUL</td>
-<td>F</td>
-<td>L</td>
-</tr>
-<tr>
-<td>BRANCO</td>
-<td>H</td>
-<td>J</td>
-</tr>
-<tr>
-<td>PRETO</td>
-<td>Y</td>
-<td>U</td>
-</tr>
-</tbody></table>
+        <thead><tr><th title="Field #1">EControle</th>
+        <th title="Field #2">jogador 0</th>
+        <th title="Field #3">jogador 1</th>
+        </tr></thead>
+        <tbody><tr>
+        <td>HORIZONTAL</td>
+        <td>A - D</td>
+        <td>LeftArrow - RightArrow</td>
+        </tr>
+        <tr>
+        <td>VERTICAL</td>
+        <td>S - W</td>
+        <td>DownArrow - UpArrow</td>
+        </tr>
+        <tr>
+        <td>VERDE</td>
+        <td>R</td>
+        <td>O</td>
+        </tr>
+        <tr>
+        <td>VERMELHO</td>
+        <td>T</td>
+        <td>I</td>
+        </tr>
+        <tr>
+        <td>AMARELO</td>
+        <td>G</td>
+        <td>K</td>
+        </tr>
+        <tr>
+        <td>AZUL</td>
+        <td>F</td>
+        <td>L</td>
+        </tr>
+        <tr>
+        <td>BRANCO</td>
+        <td>H</td>
+        <td>J</td>
+        </tr>
+        <tr>
+        <td>PRETO</td>
+        <td>Y</td>
+        <td>U</td>
+        </tr>
+        </tbody></table>
 
         <p>As funções que devem ser utilizadas para criação de inputs nos jogos estão na classe <code>InputArcade</code> e são estáticas. As utilizadas para inputs digitais (botões) são <code>Apertou</code>, <code>Apertado</code> e <code>Soltou</code>, cada uma recebendo os parâmetros de índice de jogador (0 ou 1) e qual é o controle a ser consultado. A função <code>Eixo</code> recebe o índice de jogador e o eixo a ser consultado e serve para inptus analógicos. As assinaturas das funções estão abaixo.</p>
 

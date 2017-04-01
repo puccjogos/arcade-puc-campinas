@@ -18,6 +18,7 @@ Além de um `unitypackage` com o prefab `ArcadeJogo` e lógica de `InputArcade`,
 
 ## ideias
 
+
 - [x] json funciona numa boa para carregar infos de cada jogo, integrado com WWW e um localhost com os arquivos (servidos via http);
 - [x] o mesmo esquema funciona legal para carregar texturas e criar sprites;
 - [ ] ter no build `Menu` um json com os ids de todos os jogos (que também são as pastas no localhost);
