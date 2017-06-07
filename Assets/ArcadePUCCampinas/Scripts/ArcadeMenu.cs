@@ -16,6 +16,9 @@ namespace ArcadePUCCampinas
         public List<JogoInfo> infosJogos;
         public List<JogoMenu> jogosMenu;
         public int ativo;
+        private float _fade;
+        public SpriteRenderer fadeOut;
+        private bool _abrindoJogo;
 
         void Awake()
         {
@@ -26,6 +29,10 @@ namespace ArcadePUCCampinas
             Cursor.visible = false;
             Application.runInBackground = true;
             _urlGeral = "file://" + Application.streamingAssetsPath; 
+            Color atual = Color.black;
+            atual.a = 0f;
+            fadeOut.color = atual;
+            _abrindoJogo = false;
         }
 
         IEnumerator Start()
@@ -91,32 +98,50 @@ namespace ArcadePUCCampinas
             if (!bloquear && (InputArcade.Apertou(0, EControle.VERDE) || InputArcade.Apertou(1, EControle.VERDE)))
             {
                 bloquear = true;
-                UnityEngine.Debug.Log("PROCESS NAME: " + System.Diagnostics.Process.GetCurrentProcess().ProcessName);
-                Camera.main.GetComponent<AudioListener>().enabled = false;
-                var path = Path.Combine(Application.streamingAssetsPath, jogosMenu[ativo].id_jogo + "/" + jogosMenu[ativo].id_jogo + ".exe");
-                try
-                {
-                    Process processo = new Process();
-                    processo.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
-                    processo.StartInfo.CreateNoWindow = false;
-                    processo.StartInfo.UseShellExecute = false;
-                    processo.StartInfo.FileName = path;
-                    processo.EnableRaisingEvents = true;
-                    //processo.Exited += new EventHandler(ProcessoSaiu);
-                    processo.Start();
-                    processo.WaitForExit();
-                    bloquear = false;
-                }
-                catch (Exception e)
-                {
-                    print(e);        
-                }
+                _abrindoJogo = true;
+                StartCoroutine(AbrirJogo());
+            }
+
+            if (_abrindoJogo)
+            {
+                Color atual = fadeOut.color;
+                atual.a += Time.deltaTime * 2f;
+                fadeOut.color = atual;
             }
         }
 
         void LateUpdate()
         {
             InputArcade.Atualizar();
+        }
+
+        IEnumerator AbrirJogo()
+        {
+            UnityEngine.Debug.Log("PROCESS NAME: " + System.Diagnostics.Process.GetCurrentProcess().ProcessName);
+            yield return new WaitForSecondsRealtime(2f);
+            Camera.main.GetComponent<AudioListener>().enabled = false;
+            var path = Path.Combine(Application.streamingAssetsPath, jogosMenu[ativo].id_jogo + "/" + jogosMenu[ativo].id_jogo + ".exe");
+            try
+            {
+                Process processo = new Process();
+                processo.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                processo.StartInfo.CreateNoWindow = false;
+                processo.StartInfo.UseShellExecute = false;
+                processo.StartInfo.FileName = path;
+                processo.EnableRaisingEvents = true;
+                //processo.Exited += new EventHandler(ProcessoSaiu);
+                processo.Start();
+                processo.WaitForExit();
+                _abrindoJogo = false;
+                Color atual = Color.black;
+                atual.a = 0f;
+                fadeOut.color = atual;
+                bloquear = false;
+            }
+            catch (Exception e)
+            {
+                print(e);        
+            }
         }
     }
 }

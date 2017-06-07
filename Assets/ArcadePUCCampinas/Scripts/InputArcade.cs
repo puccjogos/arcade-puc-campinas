@@ -113,15 +113,14 @@ namespace ArcadePUCCampinas
                     {
                         return Input.GetAxis("HORIZONTAL" + jogador);
                     }
-                    break;
                 case EEixo.VERTICAL:
                     {
                         return Input.GetAxis("VERTICAL" + jogador);
                     }
-                    break;
-                default:
-                    return 0f;
-                    break;
+                default :
+                    {
+                        return 0;
+                    }
             }
         }
 
@@ -137,25 +136,20 @@ namespace ArcadePUCCampinas
                     {
                         return Input.GetAxis("VERTICAL" + jogador) > 0f;
                     }
-                    break;
                 case EControle.BAIXO:
                     {
                         return Input.GetAxis("VERTICAL" + jogador) < 0f;
                     }
-                    break;
                 case EControle.DIREITA:
                     {
                         return Input.GetAxis("HORIZONTAL" + jogador) > 0f;
                     }
-                    break;
                 case EControle.ESQUERDA:
                     {
                         return Input.GetAxis("HORIZONTAL" + jogador) < 0f;
                     }
-                    break;
                 default:
                     return Input.GetButton(input.ToString() + jogador);
-                    break;
             }
         }
     }
