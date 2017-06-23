@@ -30,6 +30,8 @@ namespace ArcadePUCCampinas
         private static Dictionary<EControle, bool[]> antes;
         private static Dictionary<EControle, bool[]> atual;
 
+        private static bool _invertido = false;
+
         public static void Inicializar()
         {
             antes = new Dictionary<EControle, bool[]>();
@@ -90,23 +92,27 @@ namespace ArcadePUCCampinas
             }
         }
 
-        public static bool Apertou(int jogador, EControle input)
+        public static bool Apertou(int pJogador, EControle input)
         {
+            int jogador = ProcessarJogador(pJogador);
             return (antes[input][jogador] == false) && (atual[input][jogador] == true);
         }
 
-        public static bool Soltou(int jogador, EControle input)
+        public static bool Soltou(int pJogador, EControle input)
         {
+            int jogador = ProcessarJogador(pJogador);
             return (antes[input][jogador] == true) && (atual[input][jogador] == false);
         }
 
-        public static bool Apertado(int jogador, EControle input)
+        public static bool Apertado(int pJogador, EControle input)
         {
+            int jogador = ProcessarJogador(pJogador);
             return atual[input][jogador];
         }
 
-        public static float Eixo(int jogador, EEixo eixo)
+        public static float Eixo(int pJogador, EEixo eixo)
         {
+            int jogador = ProcessarJogador(pJogador);
             switch (eixo)
             {
                 case EEixo.HORIZONTAL:
@@ -124,6 +130,12 @@ namespace ArcadePUCCampinas
             }
         }
 
+        private static int ProcessarJogador(int desejado) {
+            if(_invertido){
+                return (desejado == 0)? 1 : 0;
+            }
+            return desejado;
+        }
         private static bool Consultar(int jogador, EControle input)
         {
             switch (input)
@@ -151,6 +163,11 @@ namespace ArcadePUCCampinas
                 default:
                     return Input.GetButton(input.ToString() + jogador);
             }
+        }
+
+        public static void TrocarControles() {
+            _invertido = !_invertido;
+            //Debug.Log("Controles invertidos? " + _invertido);
         }
     }
 }

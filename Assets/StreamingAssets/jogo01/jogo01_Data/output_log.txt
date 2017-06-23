@@ -2,10 +2,10 @@ Mono path[0] = 'C:/Sinc/Repos/ArcadePUCCampinas/Assets/StreamingAssets/jogo01/jo
 Mono path[1] = 'C:/Sinc/Repos/ArcadePUCCampinas/Assets/StreamingAssets/jogo01/jogo01_Data/Mono'
 Mono config path = 'C:/Sinc/Repos/ArcadePUCCampinas/Assets/StreamingAssets/jogo01/jogo01_Data/Mono/etc'
 PlayerConnection initialized from C:/Sinc/Repos/ArcadePUCCampinas/Assets/StreamingAssets/jogo01/jogo01_Data (debug = 0)
-PlayerConnection initialized network socket : 0.0.0.0 55129
-Multi-casting "[IP] 192.168.15.12 [Port] 55129 [Flags] 2 [Guid] 1679521946 [EditorId] 3895957094 [Version] 1048832 [Id] WindowsPlayer(DESKTOP-JJNEI32) [Debug] 0" to [225.0.0.222:54997]...
-Started listening to [0.0.0.0:55129]
-PlayerConnection already initialized - listening to [0.0.0.0:55129]
+PlayerConnection initialized network socket : 0.0.0.0 55438
+Multi-casting "[IP] 192.168.1.41 [Port] 55438 [Flags] 2 [Guid] 1023883546 [EditorId] 3895957094 [Version] 1048832 [Id] WindowsPlayer(DESKTOP-JJNEI32) [Debug] 0" to [225.0.0.222:54997]...
+Started listening to [0.0.0.0:55438]
+PlayerConnection already initialized - listening to [0.0.0.0:55438]
 Initialize engine version: 5.5.2f1 (3829d7f588f3)
 GfxDevice: creating device client; threaded=1
 Direct3D:
@@ -25,13 +25,13 @@ Platform assembly: C:\Sinc\Repos\ArcadePUCCampinas\Assets\StreamingAssets\jogo01
 Loading C:\Sinc\Repos\ArcadePUCCampinas\Assets\StreamingAssets\jogo01\jogo01_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Sinc\Repos\ArcadePUCCampinas\Assets\StreamingAssets\jogo01\jogo01_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
 Loading C:\Sinc\Repos\ArcadePUCCampinas\Assets\StreamingAssets\jogo01\jogo01_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
-- Completed reload, in  1.139 seconds
+- Completed reload, in 10.464 seconds
 Platform assembly: C:\Sinc\Repos\ArcadePUCCampinas\Assets\StreamingAssets\jogo01\jogo01_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Sinc\Repos\ArcadePUCCampinas\Assets\StreamingAssets\jogo01\jogo01_Data\Managed\System.dll (this message is harmless)
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initialized touch support.
-UnloadTime: 1.677153 ms
+UnloadTime: 1.971004 ms
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 2830 -> priority: 1 
+  Thread -> id: 22c4 -> priority: 1 

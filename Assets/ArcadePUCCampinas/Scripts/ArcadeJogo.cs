@@ -8,9 +8,8 @@ namespace ArcadePUCCampinas
     public class ArcadeJogo : Singleton<ArcadeJogo>
     {
         private bool _noMenu;
-        private int _contador;
+        private bool _trocaControles = false;
         private Transform _menu;
-        public Text _txtContador;
 
         void Awake()
         {
@@ -19,7 +18,7 @@ namespace ArcadePUCCampinas
             Cursor.visible = false;
             Application.runInBackground = true;
             _noMenu = false;
-            _menu = transform.FindChild("Menu");
+            _menu = transform.Find("Menu");
             _menu.gameObject.SetActive(false);
         }
 
@@ -29,16 +28,32 @@ namespace ArcadePUCCampinas
             {
                 if (InputArcade.Apertou(0, EControle.MENU))
                 {
-                    StartCoroutine(MostrarMenu());
+                    MostrarMenu();
                 }    
             }
             else
             {
                 // se pressionar de novo, sai do jogo
-                if (InputArcade.Apertou(0, EControle.MENU))
+                if (InputArcade.Apertou(0, EControle.VERDE) || InputArcade.Apertou(1, EControle.VERDE))
                 {
                     print("saiu");
                     Application.Quit();
+                    return;
+                }
+
+                if (InputArcade.Apertou(0, EControle.VERMELHO) || InputArcade.Apertou(1, EControle.VERMELHO))
+                {
+                    print("voltou ao jogo");
+                    SairMenu();
+                }
+
+                if (InputArcade.Apertou(0, EControle.AMARELO) || InputArcade.Apertou(1, EControle.AMARELO))
+                {
+                    if(!_trocaControles) {
+                        print("trocar controles");
+                        GetComponent<AudioSource>().Play();
+                        StartCoroutine(AlterarControles());
+                    }
                 }
             }
 
@@ -49,32 +64,26 @@ namespace ArcadePUCCampinas
             InputArcade.Atualizar();
         }
 
-        IEnumerator MostrarMenu()
+        void MostrarMenu()
         {
             // mostra menu e pausa o tempo do jogo
             _noMenu = true;
-            _contador = 5;
             _menu.gameObject.SetActive(true);
             Time.timeScale = 0;
-            _txtContador.text = _contador.ToString();
-            // contagem regressiva para voltar ao jogo
-            yield return new WaitForSecondsRealtime(1f);
-            _contador--;
-            _txtContador.text = _contador.ToString();
-            yield return new WaitForSecondsRealtime(1f);
-            _contador--;
-            _txtContador.text = _contador.ToString();
-            yield return new WaitForSecondsRealtime(1f);
-            _contador--;
-            _txtContador.text = _contador.ToString();
-            yield return new WaitForSecondsRealtime(1f);
-            _contador--;
-            _txtContador.text = _contador.ToString();
-            yield return new WaitForSecondsRealtime(1f);
-            // se o fluxo chegou aqui, religa o tempo e esconde o menu
+        }
+
+        void SairMenu() {
+            // esconde o menu e religa o tempo
             Time.timeScale = 1;
             _noMenu = false;
             _menu.gameObject.SetActive(false);
+        }
+
+        IEnumerator AlterarControles() {
+            _trocaControles = true;
+            InputArcade.TrocarControles();
+            yield return new WaitForSeconds(1f);
+            _trocaControles = false;
         }
     }
 }

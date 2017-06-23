@@ -1,35 +1,33 @@
 ﻿/* Enric Llagostera <http://enric.llagostera.com.br> */
 
 using UnityEngine;
+using UnityEngine.UI;
 using ArcadePUCCampinas;
 
 public class TestesInput : MonoBehaviour
 {
-    #region Public fields
-
-    public EControle botao;
-
-    #endregion
-
-    #region Class members
-
-    #endregion
-
-    #region Unity methods
+    public int indiceJogador;
+    private Text txt;
 
     void Start()
     {
+        txt = GetComponent<Text>();
     }
 
     void Update()
     {
-        //print("HORIZONTAL " + Input.GetAxis("HORIZONTAL0") + " VERTICAL " + Input.GetAxis("VERTICAL0"));
-        print("BOTAO " + InputArcade.Apertado(0, EControle.DIREITA));
+        txt.text = 
+            "Jogador " + indiceJogador + "\n\n" +
+            InputArcade.Apertado(indiceJogador, EControle.CIMA) + " - " +
+            InputArcade.Apertado(indiceJogador, EControle.DIREITA) + " - " +
+            InputArcade.Apertado(indiceJogador, EControle.BAIXO) + " - " +
+            InputArcade.Apertado(indiceJogador, EControle.ESQUERDA) + " - " +
+            InputArcade.Apertado(indiceJogador, EControle.VERDE) + " - " +
+            InputArcade.Apertado(indiceJogador, EControle.VERMELHO) + " - " +
+            InputArcade.Apertado(indiceJogador, EControle.PRETO) + " - " +
+            InputArcade.Apertado(indiceJogador, EControle.AZUL) + " - " +
+            InputArcade.Apertado(indiceJogador, EControle.AMARELO) + " - " +
+            InputArcade.Apertado(indiceJogador, EControle.BRANCO) + ";";
     }
 
-    #endregion
-
-    #region Private methods
-
-    #endregion
 }
